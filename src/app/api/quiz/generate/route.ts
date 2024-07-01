@@ -3,6 +3,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
+import saveQuiz from "./savetoDb";
 
 // Function to handle POST requests
 export async function POST(req: NextRequest) {
