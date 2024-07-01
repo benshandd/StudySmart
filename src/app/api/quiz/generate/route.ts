@@ -4,7 +4,6 @@ import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 
-
 // Function to handle POST requests
 export async function POST(req: NextRequest) {
   // Extract the form data from the request
@@ -40,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     // Initialize the ChatOpenAI model with the provided API key and model name
     const model = new ChatOpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+      openAIApiKey: process.env.OPENAI_API_KEY,
       modelName: "gpt-4-1106-preview",
     });
 
@@ -84,6 +83,13 @@ export async function POST(req: NextRequest) {
       },
     };
 
+    // Create a new runnable, bind the function to the model, and pipe the output through the parser
+    const runnable = model
+      .bind({
+        functions: [extractionFunctionSchema],
+        function_call: { name: "extractor" },
+      })
+      .pipe(parser);
 
     // Create a new HumanMessage with the prompt and the combined text from the documents
     const message = new HumanMessage({
@@ -91,7 +97,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Invoke the model with the created message
-    const result = await model.invoke([message]);
+    const result = await runnable.invoke([message]);
     console.log(result);
 
     // Return a successful response
