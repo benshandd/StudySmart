@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout template and data
         uses: actions/checkout@v2
-      - name: Initialize bulk-issue-creator
-        run: bulk-issue-creator init
       - name: Create bulk issues
         uses: benbalter/bulk-issue-creator@v2
         with:
