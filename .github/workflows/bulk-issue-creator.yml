@@ -13,20 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Bulk Issue Creator
     steps:
-      - name: Checkout repository
+      - name: Checkout template and data
         uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install bulk-issue-creator
-        run: npm install -g bulk-issue-creator
-
       - name: Initialize bulk-issue-creator
         run: bulk-issue-creator init
-
       - name: Create bulk issues
         uses: benbalter/bulk-issue-creator@v2
         with:
