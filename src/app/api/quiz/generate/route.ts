@@ -3,7 +3,7 @@ import { ChatOpenAI } from "@langchain/openai";
 import { HumanMessage } from "@langchain/core/messages";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
-import saveQuiz from "./savetoDb";
+import saveQuiz from "./saveToDb";
 
 // Function to handle POST requests
 export async function POST(req: NextRequest) {
@@ -101,11 +101,9 @@ export async function POST(req: NextRequest) {
     const result = await runnable.invoke([message]);
     console.log(result);
 
+    const { quizId } = await saveQuiz(result.quiz);
     // Return a successful response
-    return NextResponse.json(
-      { message: "Created successfully" },
-      { status: 200 }
-    );
+    return NextResponse.json({ quizId }, { status: 200 });
   } catch (e: any) {
     // Return an error response if any exception occurs
     return NextResponse.json({ error: e.message }, { status: 500 });
