@@ -10,16 +10,15 @@ type Props = {
   totalQuestions: number;
 };
 
-
 const QuizSubmission = (props: Props) => {
   const { scorePercentage, score, totalQuestions } = props;
-  const {reward} = useReward('rewardId','confetti')
+  const { reward } = useReward("rewardId", "confetti");
   useEffect(() => {
-    if(scorePercentage === 100){
+    if (scorePercentage === 100) {
       reward();
     }
-  }, [scorePercentage, reward])
-  
+  }, [scorePercentage, reward]);
+
   return (
     <div className="flex flex-col flex-1">
       <main className="py-11 flex flex-col gap-4 items-center flex-1 mt-24">
@@ -29,14 +28,14 @@ const QuizSubmission = (props: Props) => {
           <div className="flex flex-col items-center">
             <p>Congratulations! 🎉</p>
             <div className="flex justify-center">
-            <Image
-              src="/images/owl-smiling.png"
-              alt="Smiling Owl Image"
-              width={400}
-              height={400}
-            ></Image>
-          </div>
-          <span id="rewardId"/>
+              <Image
+                src="/images/owl-smiling.png"
+                alt="Smiling Owl Image"
+                width={400}
+                height={400}
+              ></Image>
+            </div>
+            <span id="rewardId" />
           </div>
         ) : (
           <>
