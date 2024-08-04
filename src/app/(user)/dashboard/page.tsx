@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { quizzes } from "@/db/schema";
 import { auth } from "@/auth";
 import QuizzesTable, { Quiz } from "./quizzesTable";
+import getUserMetrics from "@/app/actions/getUserMetrics";
 
 const Page = async () => {
   const session = await auth();
@@ -16,8 +17,8 @@ const Page = async () => {
     where: eq(quizzes.userId, userId),
   });
 
-  //console.log(userQuizzes);
-
+  const userData = await getUserMetrics();
+  console.log(userData);
   return <QuizzesTable quizzes={userQuizzes} />;
 };
 
