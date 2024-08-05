@@ -25,3 +25,4 @@ export function roundIfNumber(value: string | number | null) {
   }
   return value;
 }
+export const PRICE_ID: string = "price_1PkK3MAyppt8zSclV58t86D9";

@@ -35,7 +35,7 @@ const SubmissionsHeatMap = (props: Props) => {
     count: dateCountMap[date],
   }));
 
-  console.log(formattedDates);
+  //console.log(formattedDates);
 
   return (
     <HeatMap
