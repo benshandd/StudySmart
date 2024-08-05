@@ -1,10 +1,11 @@
+
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "@/components/progressBar";
 import { ChevronLeft, X } from "lucide-react";
 import ResultCard from "./ResultCard";
-import QuizzSubmission from "./QuizzSubmission";
+import QuizSubmission from "./QuizSubmission";
 import { InferSelectModel } from "drizzle-orm";
 import { questionAnswers, questions as DbQuestions, quizzes } from "@/db/schema";
 import { saveSubmission } from "@/actions/saveSubmissions";
@@ -18,7 +19,7 @@ type Props = {
   quizz: Quizz
 }
 
-export default function QuizzQuestions(props: Props) {
+export default function QuizQuestions(props: Props) {
   const { questions } = props.quizz;
   const [started, setStarted] = useState<boolean>(false);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -55,7 +56,7 @@ export default function QuizzQuestions(props: Props) {
 
   const handleSubmit = async () => {
     try {
-      const subId = await saveSubmission({ score }, props.quizz.id);
+      await saveSubmission({ score }, props.quizz.id);
     } catch (e) {
       console.log(e);
     }
@@ -79,7 +80,7 @@ export default function QuizzQuestions(props: Props) {
 
   if (submitted) {
     return (
-      <QuizzSubmission
+      <QuizSubmission
         score={score}
         scorePercentage={scorePercentage}
         totalQuestions={questions.length}
@@ -99,7 +100,7 @@ export default function QuizzQuestions(props: Props) {
         </header>
       </div>
       <main className="flex justify-center flex-1">
-        {!started ? <h1 className="text-3xl font-bold">Welcome to the quizz page👋</h1> : (
+        {!started ? <h1 className="text-3xl font-bold">Welcome to the quiz page👋</h1> : (
           <div>
             <h2 className="text-3xl font-bold">{questions[currentQuestion].questionText}</h2>
             <div className="grid grid-cols-1 gap-6 mt-6">
