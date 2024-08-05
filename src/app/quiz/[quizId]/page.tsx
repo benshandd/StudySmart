@@ -9,6 +9,7 @@ const page = async ({ params }: {
     quizId: string
   }
 }) => {
+ 
   const quizId = params.quizId;
   const quiz = await db.query.quizzes.findFirst({
     where: eq(quizzes.id, parseInt(quizId)),
@@ -20,13 +21,17 @@ const page = async ({ params }: {
       }
     }
   })
-
+  console.log(quiz)
   if (!quizId || !quiz) {
     return <div>quiz not found</div>
   };
 
   return (
-    <p>{quizId}</p>
+  
+    <QuizQuestions quizz={quiz} />
+    //<p>{quizId}</p>
+   
+
   )
 }
 
