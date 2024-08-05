@@ -8,6 +8,7 @@ import getUserMetrics from "@/app/actions/getUserMetrics";
 import MetricCard from "./metricCard";
 import getHeatMapData from "@/app/actions/getHeatMapData";
 import insertDummyData from "@/app/actions/insertDummyData";
+import SubmissionsHeatMap from "./heatMap";
 
 const Page = async () => {
   const session = await auth();
@@ -24,8 +25,6 @@ const Page = async () => {
 
   const userData = await getUserMetrics();
   const heatMapData = await getHeatMapData();
-  //
-  console.log(heatMapData);
 
   return (
     <div className="mt-4">
@@ -41,6 +40,7 @@ const Page = async () => {
         ) : (
           <p>No metrics found</p>
         )}
+        {heatMapData ? <SubmissionsHeatMap data={heatMapData.data} /> : null}
       </div>
       <QuizzesTable quizzes={userQuizzes} />
     </div>
