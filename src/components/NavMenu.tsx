@@ -50,9 +50,10 @@ export function NavMenu() {
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          
+           <Link className="flex flex-row" href="/billing">
           <CreditCard className="mr-2 h-4 w-4" />
           <span>Billing</span>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
