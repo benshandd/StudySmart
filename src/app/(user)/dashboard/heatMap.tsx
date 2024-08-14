@@ -35,12 +35,12 @@ const SubmissionsHeatMap = (props: Props) => {
     count: dateCountMap[date],
   }));
 
-  console.log(formattedDates);
+  //console.log(formattedDates);
 
   return (
     <HeatMap
       value={formattedDates}
-      width="100%"
+      width="750px"
       style={{ color: "#888" }}
       panelColors={panelColours}
       startDate={new Date("2024/08/01")}

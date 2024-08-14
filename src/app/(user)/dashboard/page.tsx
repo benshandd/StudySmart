@@ -9,6 +9,8 @@ import MetricCard from "./metricCard";
 import getHeatMapData from "@/app/actions/getHeatMapData";
 import insertDummyData from "@/app/actions/insertDummyData";
 import SubmissionsHeatMap from "./heatMap";
+import SubscribeButton from "../billing/SubscribeButton";
+import { PRICE_ID } from "@/lib/utils";
 
 const Page = async () => {
   const session = await auth();
