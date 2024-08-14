@@ -1,4 +1,3 @@
-// Page.tsx
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
 import { quizzes } from "@/db/schema";
@@ -9,8 +8,6 @@ import MetricCard from "./metricCard";
 import getHeatMapData from "@/app/actions/getHeatMapData";
 import insertDummyData from "@/app/actions/insertDummyData";
 import SubmissionsHeatMap from "./heatMap";
-import SubscribeButton from "../billing/SubscribeButton";
-import { PRICE_ID } from "@/lib/utils";
 
 const Page = async () => {
   const session = await auth();
@@ -19,7 +16,7 @@ const Page = async () => {
   if (!userId) {
     return <p>User not found</p>;
   }
-  //await insertDummyData();
+ //await insertDummyData();
 
   const userQuizzes: Quiz[] = await db.query.quizzes.findMany({
     where: eq(quizzes.userId, userId),
