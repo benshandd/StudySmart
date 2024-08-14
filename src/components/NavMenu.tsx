@@ -50,6 +50,12 @@ export function NavMenu() {
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
+           <Link className="flex flex-row" href="/quiz/new">
+          <Plus className="mr-2 h-4 w-4" />
+          <span>New Quiz</span>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
            <Link className="flex flex-row" href="/billing">
           <CreditCard className="mr-2 h-4 w-4" />
           <span>Billing</span>
@@ -94,8 +100,10 @@ export function NavMenu() {
         </Link>
       </DropdownMenuItem>
       <DropdownMenuItem>
+      <Link href="mailto:benjaminshand101@gmail.com" className="flex flex-row">
         <LifeBuoy className="mr-2 h-4 w-4" />
         <span>Support</span>
+        </Link>
       </DropdownMenuItem>
     </DropdownMenuContent>
   );
