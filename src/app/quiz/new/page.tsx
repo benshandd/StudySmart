@@ -7,7 +7,7 @@ import { useState } from "react";
 import { getStripe } from "@/lib/stripe-client";
 import { useRouter } from "next/navigation";
 import { PRICE_ID } from "@/lib/utils";
-import UpgradePlan from "../upgradePlan";
+import UpgradePlan from "../UpgradePlan";
 
 const page = async () => {
   const session = await auth();
