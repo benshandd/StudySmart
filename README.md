@@ -54,12 +54,18 @@
 StudySmart is an AI-powered application designed to assist students in preparing for exams by generating mock tests from their uploaded study materials. By leveraging advanced AI models, StudySmart helps students focus on key areas and practice with custom-generated questions tailored to their materials.
 
 ## Screenshots
-<img src="public/images/readme/studysmart_dashboard1.png" alt="StudySmart Dashboard" width="30%" height="30%">
-<img src="public/images/readme/take_test.png" alt="Take Test" width="30%" height="30%">
-<img src="public/images/readme/quesion.png" alt="Question" width="30%" height="30%">
-<img src="public/images/readme/halfcomplete.png" alt="Half Complete" width="30%" height="30%">
-<img src="public/images/readme/conplete.png" alt="Complete" width="30%" height="30%">
-<img src="public/images/readme/subscribe.png" alt="Subscribe" width="30%" height="30%">
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+
+  <img src="public/images/readme/studysmart_dashboard1.png" alt="StudySmart Dashboard" width="30%" height="30%">
+  <img src="public/images/readme/take_test.png" alt="Take Test" width="30%" height="30%">
+  <img src="public/images/readme/quesion.png" alt="Question" width="30%" height="30%">
+  
+  <img src="public/images/readme/halfcomplete.png" alt="Half Complete" width="30%" height="30%">
+  <img src="public/images/readme/conplete.png" alt="Complete" width="30%" height="30%">
+  <img src="public/images/readme/subscribe.png" alt="Subscribe" width="30%" height="30%">
+
+</div>
 
 
 
