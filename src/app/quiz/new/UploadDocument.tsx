@@ -73,7 +73,8 @@ const UploadDocument = () => {
           className="bg-secondary w-full flex h-20 rounded-md border-4 border-dashed border-blue-900 relative"
         >
           <div className="absolute inset-0 m-auto flex justify-center items-center">
-            {document && document?.name ? document.name : "Drag your document here"}{" "}
+          {document instanceof File && document.name ? document.name : "Drag your document here"}{" "}
+
           </div>
           <input
             type="file"

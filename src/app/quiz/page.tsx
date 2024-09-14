@@ -140,7 +140,7 @@ export default function Home() {
           correctAnswer={
             questions[currentQuestion].answer.find(
               (answer) => answer.isCorrect === true
-            )?.answerText
+            )?.answerText || "No correct answer available"
           }
         />
 

@@ -24,7 +24,7 @@ type Props = {
 };
 
 export default function QuizQuestions(props: Props) {
-  const { title, questions } = props.quizz;
+  const { name, questions } = props.quizz;
   const [started, setStarted] = useState<boolean>(false);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [correctAnswers, setCorrectAnswers] = useState<number>(0);
@@ -97,14 +97,15 @@ export default function QuizQuestions(props: Props) {
   const selectedAnswer: number | null | undefined = userAnswers.find(
     (item) => item.questionId === questions[currentQuestion].id
   )?.answerId;
-  const isCorrect: boolean | null | undefined =
-    questions[currentQuestion].answers.findIndex(
-      (answer) => answer.id === selectedAnswer
-    ) !== -1
-      ? questions[currentQuestion].answers.find(
-          (answer) => answer.id === selectedAnswer
-        )?.isCorrect
-      : null;
+  const isCorrect: boolean | null =
+  questions[currentQuestion].answers.findIndex(
+    (answer) => answer.id === selectedAnswer
+  ) !== -1
+    ? questions[currentQuestion].answers.find(
+        (answer) => answer.id === selectedAnswer
+      )?.isCorrect ?? null // Default to null if isCorrect is undefined
+    : null;
+
 
   if (submitted) {
     return (
@@ -158,7 +159,7 @@ export default function QuizQuestions(props: Props) {
       <main className="flex justify-center flex-1 items-center flex-col space-y-6">
         {!started ? (
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">{props.quizz.name}</h1>
+            <h1 className="text-4xl font-bold mb-4">{name}</h1>
             <p className="text-xl mb-2">{props.quizz.description}</p>
             <p className="text-3xl font-bold">Press start to begin</p>
           </div>

@@ -5,6 +5,24 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 import saveQuiz from "./saveToDb";
 
+// Define the structure of the expected quiz output
+interface Quiz {
+  name: string;
+  description: string;
+  questions: {
+    questionText: string;
+    answers: {
+      answerText: string;
+      isCorrect: boolean;
+    }[];
+  }[];
+}
+
+// Define the structure of the result returned by the runnable
+interface ModelResult {
+  quiz: Quiz;
+}
+
 // Function to handle POST requests
 export async function POST(req: NextRequest) {
   // Extract the form data from the request
@@ -44,10 +62,10 @@ export async function POST(req: NextRequest) {
       modelName: "gpt-4o-mini-2024-07-18",
     });
 
-    //Create parser with the JSONOutput Functions Parser
+    // Create parser with the JSONOutput Functions Parser
     const parser = new JsonOutputFunctionsParser();
 
-    //Extract ChatGPT output to my chosen format
+    // Extract ChatGPT output to my chosen format
     const extractionFunctionSchema = {
       name: "extractor",
       description: "Extracts fields from the output",
@@ -98,14 +116,24 @@ export async function POST(req: NextRequest) {
     });
 
     // Invoke the model with the created message
-    const result = await runnable.invoke([message]);
-    console.log(result);
+    const result: ModelResult = await runnable.invoke([message]) as ModelResult;
+    
+    // Log the result to inspect its structure
+    console.log("Model output:", result);
 
+    // Check if the result has the quiz property before proceeding
+    if (!result || !result.quiz) {
+      throw new Error("Quiz data not found in the model output.");
+    }
+
+    // Save the quiz and return the quiz ID
     const { quizId } = await saveQuiz(result.quiz);
+
     // Return a successful response
     return NextResponse.json({ quizId }, { status: 200 });
   } catch (e: any) {
-    // Return an error response if any exception occurs
+    // Log the error and return an error response
+    console.error("Error occurred:", e);
     return NextResponse.json({ error: e.message }, { status: 500 });
   }
 }
