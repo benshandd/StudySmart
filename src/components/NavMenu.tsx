@@ -46,10 +46,6 @@ export function NavMenu() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
            <Link className="flex flex-row" href="/quiz/new">
           <Plus className="mr-2 h-4 w-4" />
           <span>New Quiz</span>
@@ -62,8 +58,10 @@ export function NavMenu() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
+        <Link className="flex flex-row" href="/settings">
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />

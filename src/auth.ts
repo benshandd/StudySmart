@@ -23,5 +23,11 @@ export const {
       }
       return session;
     },
+    async redirect({ url, baseUrl }) {
+      if (url === `${baseUrl}/dashboard`) {
+        return baseUrl;
+      }
+      return `${baseUrl}/dashboard`;
+    },
   },
 });

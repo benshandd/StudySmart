@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { quizzes, questions as dbQuestions, questionAnswers } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
+import { auth } from "@/auth";
 
 type Quiz = InferInsertModel<typeof quizzes>;
 type Question = InferInsertModel<typeof dbQuestions>;
@@ -11,13 +12,23 @@ interface SaveQuizData extends Quiz {
 }
 
 export default async function saveQuiz(quizData: SaveQuizData) {
+  // Retrieve the session and user ID
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    throw new Error("User is not authenticated");
+  }
+
   const { name, description, questions } = quizData;
 
+  // Insert the new quiz into the database with the userId
   const newQuiz = await db
     .insert(quizzes)
     .values({
       name,
-      description
+      description,
+      userId, // Add the userId to the quiz
     })
     .returning({ insertedId: quizzes.id });
   const quizId = newQuiz[0].insertedId;
@@ -28,7 +39,7 @@ export default async function saveQuiz(quizData: SaveQuizData) {
         .insert(dbQuestions)
         .values({
           questionText: question.questionText,
-          quizId
+          quizId,
         })
         .returning({ questionId: dbQuestions.id });
 
@@ -37,12 +48,12 @@ export default async function saveQuiz(quizData: SaveQuizData) {
           question.answers.map((answer) => ({
             answerText: answer.answerText,
             isCorrect: answer.isCorrect,
-            questionId
+            questionId,
           }))
-        )
+        );
       }
     }
-  })
+  });
 
   return { quizId };
 }

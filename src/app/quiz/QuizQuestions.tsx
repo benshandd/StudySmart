@@ -13,6 +13,7 @@ import {
 } from "@/db/schema";
 import { saveSubmission } from "@/actions/saveSubmissions";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Answer = InferSelectModel<typeof questionAnswers>;
 type Question = InferSelectModel<typeof DbQuestions> & { answers: Answer[] };
@@ -90,7 +91,9 @@ export default function QuizQuestions(props: Props) {
     router.push("/dashboard");
   };
 
-  const scorePercentage: number = Math.round((correctAnswers / questions.length) * 100);
+  const scorePercentage: number = Math.round(
+    (correctAnswers / questions.length) * 100
+  );
   const selectedAnswer: number | null | undefined = userAnswers.find(
     (item) => item.questionId === questions[currentQuestion].id
   )?.answerId;
@@ -115,11 +118,21 @@ export default function QuizQuestions(props: Props) {
           variant="neo"
           size="lg"
           onClick={handleRestart}
-          className="flex items-center space-x-2"
+          className="items-center space-x-2"
         >
           <RefreshCw />
           <span>Restart</span>
         </Button>
+       
+        <Button
+          variant="neo"
+          size="lg"
+          onClick={handleRestart}
+          className="items-center space-x-2"
+        >
+          <span>Home</span>
+        </Button>
+ 
       </div>
     );
   }

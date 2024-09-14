@@ -14,20 +14,25 @@ function SignOut() {
       action={async () => {
         "use server";
         await signOut();
+        window.location.href = "/"; // Redirect to home page after sign out
       }}
     >
       <Button type="submit" variant="ghost">Sign Out</Button>
     </form>
   );
 }
+
+
+
+
 const Header = async () => {
   const session = await auth();
   return (
     <header>
       <nav className="px-4 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-        <Link href="/dashboard">
-          <h1 className="text-3xl font-bold">Study Smart</h1>
+          <Link href={session?.user ? "/dashboard" : "/"} passHref>
+            <h1 className="text-3xl font-bold cursor-pointer">Study Smart📚</h1>
           </Link>
           <div>
             {session?.user ? (
@@ -51,8 +56,7 @@ const Header = async () => {
                 <SignOut />
               </div>
             ) : (
-              
-              <Link href="api/auth/signin">Link
+              <Link href="/api/auth/signin">
                 <Button variant="link" className="rounded-xl border">
                   Sign in
                 </Button>
@@ -64,4 +68,5 @@ const Header = async () => {
     </header>
   );
 };
+
 export default Header;

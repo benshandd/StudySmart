@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     // Prompt to generate a quiz based on the document's text
     const prompt =
-      "given the text which is a summary of the document, generate a quiz based on the text. Return json only that contains a quiz object with fields: name, description and questions. The questions is an array of objects with fields: questionText, answers. The answers is an array of objects with fields: answerText, isCorrect.";
+      "given the text which is a summary of the document, generate a quiz based on the text.The number of questions should be proportional to the amount of information provided in the document, with a minimum of 10 and a maximum of 20 questions. Return json only that contains a quiz object with fields: name, description and questions. The questions is an array of objects with fields: questionText, answers. The answers is an array of objects with fields: answerText, isCorrect.";
 
     // Check if the OpenAI API key is provided
     if (!process.env.OPENAI_API_KEY) {
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     // Initialize the ChatOpenAI model with the provided API key and model name
     const model = new ChatOpenAI({
       openAIApiKey: process.env.OPENAI_API_KEY,
-      modelName: "gpt-4-1106-preview",
+      modelName: "gpt-4o-mini-2024-07-18",
     });
 
     //Create parser with the JSONOutput Functions Parser
